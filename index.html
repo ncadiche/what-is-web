@@ -1,0 +1,113 @@
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  #container {
+    width: 500px;
+    height: 500px;
+
+    border: 1px solid grey;
+  }
+
+  #main-page {
+    display: block;
+  }
+
+  #grid {
+    display: none;
+    grid-template-columns: repeat(25, 20px);
+    grid-template-rows: repeat(25, 20px);
+  }
+
+  .square {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+  }
+</style>
+
+<body>
+  <div id="container">
+    <div id="main-page">
+      <h1>
+        What is a website...
+      </h1>
+      <p>
+        I pondered this question for many days.
+        <br>
+        <br>Could a website be a plant with its many vines like connecting links and its leaves like files and destinations.
+        <br>Could a website be a cloud made up of hundreds of files and assets like the water droplets painting beautiful scenes across the sky.
+        <br>Could a website be a train track linking people, ideas, and information from across the world to one another through one central system with hundreds of smaller connections.
+        <br>
+        <br>What is a website... and that's when it came to me.
+        <br>
+        <br>A website has no definition. It has no concrete meaning. It has no set resctrictions or restraints for what it should or should not be. A website is art. It is information. It is an introduction to its creator. It is a platform for communication.
+        <br>
+        <br>A website is what a website wants to be. And thats why I made this website for thee...
+        <br>
+        <br> Click the button below.. then click the "?" and make some artwork that inspires and educates others on what a website should be. :)
+      </p>
+
+      <button onclick="showGrid()">
+        CLICK ME
+      </button>
+    </div>
+
+    <div id="grid"></div>
+
+    <script>
+      const textArt = [
+        "T", "h", "e", " ", "w", "e", "b", " ", "i", "s", " ", "y", "o", "u", "r", "s", "!"," ", "N", "o", "w", " ", "w", "h", "a", "t", " ", "w", "i", "l", "l", " ", "y", "o", "u", " ", "d", "o", " ", "w", "i", "t", "h", " ", "i", "t", "?"  
+      ];
+
+      const colors = [
+        "#FFADAD", "#FFD6A5", "#FDFFB6", "#CAFFBF", "#9BF6FF", "#A0C4FF", "#BDB2FF",
+        "#FFC6FF"
+      ];
+
+      const grid = document.getElementById("grid");
+      const mainPage = document.getElementById("main-page");
+      const container = document.getElementById("container");
+
+      function showGrid() {
+        mainPage.style.display = "none";
+        grid.style.display = "grid";
+      }
+
+      for (let i = 0; i < 625; i++) {
+        const square = document.createElement("div");
+        square.classList.add("square");
+        square.textContent = "?";
+        square.dataset.revealed = "false"; 
+
+        square.addEventListener("click", () => {
+          if (square.dataset.revealed === "false") {
+            const letter = textArt[i % textArt.length];
+            square.textContent = letter;
+            square.style.backgroundColor = colors[i % colors.length];
+            square.dataset.revealed = "true";
+          } else {
+            square.textContent = "?";
+            square.style.backgroundColor = "white";
+            square.dataset.revealed = "false";
+          }
+        });
+
+        grid.appendChild(square);
+      }
+    </script>
+  </div>
+</body>
